@@ -325,17 +325,17 @@ export class AppComponent {
         this.products = [
             new Product(
                 'MYSHOES', 'Black Running Shoes',
-                './public/resources/images/products/black-shoes.jpg',
+                require('../../public/resources/images/products/black-shoes.jpg'),
                 ['Men', 'Shoes', 'Running Shoes'],
                 109.99),
             new Product(
                 'NEATOJACKET', 'Blue Jacket',
-                './public/resources/images/products/blue-jacket.jpg',
+                require('../../public/resources/images/products/blue-jacket.jpg'),
                 ['Women', 'Apparel', 'Jackets & Vests'],
                 238.99),
             new Product(
                 'NICEHAT', 'A Nice Black Hat',
-                './public/resources/images/products/black-hat.jpg',
+                require('../../public/resources/images/products/black-hat.jpg'),
                 ['Men', 'Accessories', 'Hats'],
                 29.99)
         ];

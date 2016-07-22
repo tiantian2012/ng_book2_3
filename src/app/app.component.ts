@@ -1,6 +1,9 @@
 import { Component,EventEmitter } from '@angular/core';
+import { Http,Headers } from '@angular/http';
 import "../../public/resources/vendor/semantic.min.css";
 import "../../public/resources/css/style.css";
+import 'rxjs/add/operator/toPromise';
+var queryString = require ("querystring");
 
 // /**
 //  * Product
@@ -316,12 +319,11 @@ class ProductsList {
                 (onProductSelected)="productWasSelected($event)">
             </products-list>
         </div>
-
     `
 })
 export class AppComponent {
     products: Product[];
-    constructor() {
+    constructor(public http:Http) {
         this.products = [
             new Product(
                 'MYSHOES', 'Black Running Shoes',
@@ -339,10 +341,49 @@ export class AppComponent {
                 ['Men', 'Accessories', 'Hats'],
                 29.99)
         ];
+
     }
 
     productWasSelected(product:Product):void{
+
+        console.log("process.cwd():",process.cwd());
+        console.log("Url:",document.URL);
+        console.log("__dirname:",__dirname);
+        console.log("pathname:",location.pathname);
+        console.log("host:",location.host);
+        console.log("hostname:",location.hostname);
+        console.log("protocol:",location.protocol);
+        console.log("prot:",location.port);
+        
+        
+        
         console.log('Product click:',product);
         
+        var qr = queryString.stringify({ "test": "123", "name": "tian" });
+        console.log("qr:" + qr);
+        var parttens = location.pathname.split('/');
+       
+        if(parttens.length>2){
+          var temp = parttens[1];
+          var url = location.protocol + "//" + location.host + "/" + temp + "/";
+        }else{
+          temp = "serviceWeb"
+          url = location.protocol + "//" + location.hostname + ":8080" + "/" + temp + "/";
+        }
+
+        console.log("parttens:", parttens);
+
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+        
+        console.log("url:" + url);
+
+        this.http.post(url + "login/test.do", qr, { headers: headers })
+          // .map(res => res.json())
+          .subscribe(
+            data => console.log("data:",data)
+          );
+
     }
 }

@@ -1,6 +1,7 @@
 import { bootstrap }    from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';
 import { AppComponent } from './app/app.component';
+import { HTTP_PROVIDERS } from '@angular/http';
 // import { HTTP_PROVIDERS,XHRBackend } from '@angular/http';
 if (process.env.ENV === 'production') {
   enableProdMode();
@@ -11,4 +12,4 @@ if (process.env.ENV === 'production') {
 //   {provide:XHRBackend,useClass:InMemoryBackendService},
 //   {provide:SEED_DATA,useClass:InMemoryDataService}
 // ]);
-bootstrap(AppComponent);
+bootstrap(AppComponent,[HTTP_PROVIDERS]);
